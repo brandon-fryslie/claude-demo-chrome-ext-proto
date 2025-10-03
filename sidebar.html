@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Assistant</title>
+  <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>AI Assistant</h1>
+      <button id="settingsBtn" class="icon-btn" title="Settings">⚙️</button>
+    </div>
+
+    <div id="settingsPanel" class="settings-panel hidden">
+      <div class="settings-content">
+        <h3>Settings</h3>
+
+        <div class="api-provider-selector">
+          <label>API Provider:</label>
+          <div class="radio-group">
+            <label class="radio-label">
+              <input type="radio" name="apiProvider" value="openai" checked>
+              OpenAI
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="apiProvider" value="claude">
+              Claude (Anthropic)
+            </label>
+          </div>
+        </div>
+
+        <div id="openaiSettings" class="api-settings">
+          <label for="apiKey">OpenAI API Key:</label>
+          <input type="password" id="apiKey" placeholder="sk-...">
+          <p style="font-size: 12px; color: #666; margin: 4px 0 8px 0;">Uses GPT-4.1 for enhanced capabilities</p>
+        </div>
+
+        <div id="claudeSettings" class="api-settings hidden">
+          <label for="claudeApiKey">Claude API Key:</label>
+          <input type="password" id="claudeApiKey" placeholder="sk-ant-...">
+          <p style="font-size: 12px; color: #666; margin: 4px 0 8px 0;">Uses Claude 3.5 Sonnet for superior code writing</p>
+        </div>
+
+        <label for="ttsVoice">Voice:</label>
+        <select id="ttsVoice">
+          <option value="nova">Nova (Female - Dynamic)</option>
+          <option value="shimmer">Shimmer (Female - Soft)</option>
+          <option value="fable">Fable (Male British)</option>
+          <option value="echo">Echo (Male)</option>
+          <option value="onyx">Onyx (Deep Male)</option>
+          <option value="alloy">Alloy (Neutral)</option>
+        </select>
+        <div class="settings-actions">
+          <button id="saveSettings" class="btn-primary">Save</button>
+          <button id="cancelSettings" class="btn-secondary">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="chat">💬 Chat</button>
+      <button class="tab-btn" data-tab="scripter">🐵 MonkaiScripter</button>
+    </div>
+
+    <div id="chatTab" class="tab-content active">
+      <div id="chatContainer" class="chat-container">
+        <div id="messages" class="messages"></div>
+        <div id="speakingIndicator" class="speaking-indicator">
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <div class="wave"></div>
+          <span>Speaking...</span>
+          <button id="stopSpeakingBtn" class="stop-btn" title="Stop speaking">⏹</button>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <button id="voiceBtn" class="voice-btn" title="Voice input">🎤</button>
+        <textarea id="userInput" placeholder="Ask me anything about this page..." rows="2"></textarea>
+        <button id="sendBtn" class="send-btn" title="Send">➤</button>
+      </div>
+    </div>
+
+    <div id="scripterTab" class="tab-content hidden">
+      <div class="scripter-container">
+        <div class="script-header">
+          <h3>MonkaiScripter</h3>
+          <button id="newScriptBtn" class="btn-primary">+ New Script</button>
+        </div>
+
+        <div id="scriptList" class="script-list"></div>
+
+        <div id="scriptEditor" class="script-editor hidden">
+          <div class="editor-header">
+            <input type="text" id="scriptName" placeholder="Script name..." class="script-name-input">
+            <button id="closeEditorBtn" class="btn-secondary">Close</button>
+          </div>
+          <textarea id="scriptCode" class="code-editor" placeholder="// Write your JavaScript code here
+// This script will run on pages matching the URL pattern
+
+console.log('MonkaiScript running!');"></textarea>
+          <div class="editor-controls">
+            <label for="scriptUrl">URL Pattern:</label>
+            <input type="text" id="scriptUrl" placeholder="*://*.example.com/*" class="url-pattern-input">
+            <label class="checkbox-label">
+              <input type="checkbox" id="scriptEnabled" checked>
+              Enabled
+            </label>
+            <button id="saveScriptBtn" class="btn-primary">Save Script</button>
+            <button id="deleteScriptBtn" class="btn-danger">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="clearBtn" class="btn-small">Clear Chat</button>
+      <label class="checkbox-label">
+        <input type="checkbox" id="includeDom" checked>
+        Include DOM
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" id="includeConsole" checked>
+        Include Console
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" id="enableTts" checked>
+        Voice Response
+      </label>
+      <div class="voice-controls">
+        <div class="voice-selector">
+          <label for="voiceSelect">Voice:</label>
+          <select id="voiceSelect">
+            <option value="nova">Nova (Female - Dynamic)</option>
+            <option value="shimmer">Shimmer (Female - Soft)</option>
+            <option value="fable">Fable (Male British)</option>
+            <option value="echo">Echo (Male)</option>
+            <option value="onyx">Onyx (Deep Male)</option>
+            <option value="alloy">Alloy (Neutral)</option>
+          </select>
+        </div>
+        <div class="speed-control">
+          <label for="speedSlider">Speed: <span id="speedValue">1.25x</span></label>
+          <input type="range" id="speedSlider" min="0.5" max="2.0" step="0.05" value="1.25">
+        </div>
+        <label class="checkbox-label">
+          <input type="checkbox" id="useHDModel">
+          HD Quality
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <script src="sidebar.js"></script>
+  <script src="scripter.js"></script>
+</body>
+</html>

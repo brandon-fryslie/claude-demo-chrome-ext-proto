@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Assistant</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>AI Assistant</h1>
+      <button id="settingsBtn" class="icon-btn" title="Settings">⚙️</button>
+    </div>
+
+    <div id="settingsPanel" class="settings-panel hidden">
+      <div class="settings-content">
+        <h3>Settings</h3>
+        <label for="apiKey">OpenAI API Key:</label>
+        <input type="password" id="apiKey" placeholder="sk-...">
+        <label for="model">Model:</label>
+        <select id="model">
+          <option value="gpt-4-turbo-preview">GPT-4 Turbo</option>
+          <option value="gpt-4">GPT-4</option>
+          <option value="gpt-3.5-turbo" selected>GPT-3.5 Turbo</option>
+        </select>
+        <div class="settings-actions">
+          <button id="saveSettings" class="btn-primary">Save</button>
+          <button id="cancelSettings" class="btn-secondary">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="chatContainer" class="chat-container">
+      <div id="messages" class="messages"></div>
+    </div>
+
+    <div class="input-container">
+      <button id="voiceBtn" class="voice-btn" title="Voice input">🎤</button>
+      <textarea id="userInput" placeholder="Ask me anything about this page..." rows="2"></textarea>
+      <button id="sendBtn" class="send-btn" title="Send">➤</button>
+    </div>
+
+    <div class="controls">
+      <button id="clearBtn" class="btn-small">Clear Chat</button>
+      <label class="checkbox-label">
+        <input type="checkbox" id="includeDom" checked>
+        Include DOM
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" id="includeConsole" checked>
+        Include Console
+      </label>
+      <label class="checkbox-label">
+        <input type="checkbox" id="enableTts" checked>
+        Voice Response
+      </label>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
